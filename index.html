@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<!-- saved from url=(0090)https://party.websim.ai/api/v1/sites/3ila1797VO50uwZZS/html?origin=https%3A%2F%2Fwebsim.ai -->
+<html w-tid="0"><head w-tid="1"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>html{min-height:100%}.ctxmenu{position:fixed;border:1px solid #999;padding:2px 0;box-shadow:#aaa 3px 3px 3px;background:#fff;margin:0;z-index:9999;overflow-y:auto;font:15px Verdana, sans-serif;box-sizing:border-box}.ctxmenu li{margin:1px 0;display:block;position:relative;user-select:none}.ctxmenu li.heading{font-weight:bold;margin-left:-5px}.ctxmenu li span{display:block;padding:2px 20px;cursor:default}.ctxmenu li a{color:inherit;text-decoration:none}.ctxmenu li.icon{padding-left:15px}.ctxmenu img.icon{position:absolute;width:18px;left:10px;top:2px}.ctxmenu li.disabled{color:#ccc}.ctxmenu li.divider{border-bottom:1px solid #aaa;margin:5px 0}.ctxmenu li.interactive:hover{background:rgba(0, 0, 0, .1)}.ctxmenu li.submenu::after{content:"";position:absolute;display:block;top:0;bottom:0;right:.4em;margin:auto .1rem auto auto;border-right:1px solid #000;border-top:1px solid #000;transform:rotate(45deg);width:.3rem;height:.3rem}.ctxmenu li.submenu.disabled::after{border-color:#ccc}</style><!--<base href="" w-tid="2">--><base href=".">
+<link rel="stylesheet" href="./fonts(1).css">
+<link rel="stylesheet" href="./ctxmenu.css">
+
+
+<title w-tid="3">SoundScaper - Upload and Listen to Your Music</title>
+<style w-tid="4">
+  body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    color: #fff;
+    height: 100vh;
+  }
+  
+  @keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  }
+
+  .upload-area {
+    background: rgba(255,255,255,0.1);
+    border: 2px dashed #fff;
+    border-radius: 10px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .upload-area:hover {
+    background: rgba(255,255,255,0.2);
+  }
+
+  .upload-btn {
+    background: #fdbb2d;
+    color: #1a2a6c;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .upload-btn:hover {
+    background: #fff;
+    color: #1a2a6c;
+  }
+
+  .player {
+    margin-top: 2rem;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 1rem;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  .control-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    margin: 0 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .control-btn:hover {
+    color: #fdbb2d;
+  }
+
+  .progress {
+    width: 100%;
+    height: 5px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 5px;
+    margin-top: 1rem;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    width: 0%;
+    height: 100%;
+    background: #fdbb2d;
+    transition: width 0.1s linear;
+  }
+
+  .playlist {
+    margin-top: 2rem;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 1rem;
+  }
+
+  .playlist-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .playlist-item:hover {
+    background: rgba(255,255,255,0.1);
+  }
+
+  .playlist-item-title {
+    flex-grow: 1;
+    margin-left: 1rem;
+  }
+
+</style>
+</head>
+<body w-tid="5">
+  <div class="container" w-tid="6">
+    <h1 w-tid="7">SoundScaper</h1>
+    
+    <div class="upload-area" id="uploadArea" w-tid="8">
+      <p w-tid="9">Drag and drop your music files here or</p>
+      <button class="upload-btn" id="uploadBtn" w-tid="10">Choose Files</button>
+      <input type="file" id="fileInput" style="display: none;" accept="audio/*" multiple="" w-tid="11">
+    </div>
+
+    <div class="player" w-tid="12">
+      <audio id="audioPlayer" w-tid="13"></audio>
+      <div class="progress" w-tid="14">
+        <div class="progress-bar" id="progressBar" w-tid="15"></div>
+      </div>
+      <div class="controls" w-tid="16">
+        <button class="control-btn" id="prevBtn" w-tid="17">⏮</button>
+        <button class="control-btn" id="playPauseBtn" w-tid="18">▶</button>
+        <button class="control-btn" id="nextBtn" w-tid="19">⏭</button>
+      </div>
+    </div>
+
+    <div class="playlist" id="playlist" w-tid="20">
+      <!-- Playlist items will be dynamically added here -->
+    </div>
+  </div>
+
+  <script w-tid="21">
+    const uploadArea = document.getElementById('uploadArea');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const fileInput = document.getElementById('fileInput');
+    const audioPlayer = document.getElementById('audioPlayer');
+    const progressBar = document.getElementById('progressBar');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const playlist = document.getElementById('playlist');
+
+    let currentTrack = 0;
+    let tracks = [];
+
+    uploadArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadArea.style.background = 'rgba(255,255,255,0.2)';
+    });
+
+    uploadArea.addEventListener('dragleave', () => {
+      uploadArea.style.background = 'rgba(255,255,255,0.1)';
+    });
+
+    uploadArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadArea.style.background = 'rgba(255,255,255,0.1)';
+      handleFiles(e.dataTransfer.files);
+    });
+
+    uploadBtn.addEventListener('click', () => {
+      fileInput.click();
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      handleFiles(e.target.files);
+    });
+
+    function handleFiles(files) {
+      for (let file of files) {
+        if (file.type.startsWith('audio/')) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            tracks.push({
+              name: file.name,
+              src: e.target.result
+            });
+            updatePlaylist();
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+    }
+
+    function updatePlaylist() {
+      playlist.innerHTML = '';
+      tracks.forEach((track, index) => {
+        const item = document.createElement('div');
+        item.classList.add('playlist-item');
+        item.innerHTML = `
+          <span>${index + 1}</span>
+          <span class="playlist-item-title">${track.name}</span>
+        `;
+        item.addEventListener('click', () => {
+          currentTrack = index;
+          loadTrack();
+        });
+        playlist.appendChild(item);
+      });
+    }
+
+    function loadTrack() {
+      audioPlayer.src = tracks[currentTrack].src;
+      audioPlayer.play();
+      playPauseBtn.textContent = '⏸';
+    }
+
+    playPauseBtn.addEventListener('click', togglePlayPause);
+    prevBtn.addEventListener('click', playPrevious);
+    nextBtn.addEventListener('click', playNext);
+
+    function togglePlayPause() {
+      if (audioPlayer.paused) {
+        audioPlayer.play();
+        playPauseBtn.textContent = '⏸';
+      } else {
+        audioPlayer.pause();
+        playPauseBtn.textContent = '▶';
+      }
+    }
+
+    function playPrevious() {
+      currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+      loadTrack();
+    }
+
+    function playNext() {
+      currentTrack = (currentTrack + 1) % tracks.length;
+      loadTrack();
+    }
+
+    audioPlayer.addEventListener('timeupdate', () => {
+      const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+      progressBar.style.width = `${progress}%`;
+    });
+
+    audioPlayer.addEventListener('ended', playNext);
+  </script>
+</body></html>
